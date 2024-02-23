@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
+import UseMemo from './UseMemo';
 
 function App() {
   let [fruit,setFruit] = useState('apple'); //get //changeFunction
@@ -9,14 +10,17 @@ function App() {
     // console.log(fruit);
     setFruit('orange');
   }
-  let increase= () => {
+  let increase  = () => {
     setCount((prevState)  => prevState+1);
     setCount((prevState)  => prevState+1);
     setCount((prevState)  => prevState+1);
   }
+  useEffect(()=>{
+    console.log("call api");
+  },[count]);
   return (
-    <>
-      <div className="App">
+    <div className="App">
+       <div>
       <h5>{fruit}</h5>
       <button onClick={changeFruit}>Change Fruit</button>
       </div>
@@ -25,9 +29,8 @@ function App() {
         <h5>Count - {count}</h5>
         <button onClick={increase}>Increase</button>
       </div>
-
-    </>
-    
+      <UseMemo/>
+    </div>
   );
 }
 
